@@ -12,6 +12,7 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     @IBOutlet var imageFromCameraRoll: UIImageView!
+    @IBOutlet var bSavePic : UIButton!
     
     var scale:CGFloat = 1.0
     var width:CGFloat = 0
@@ -163,6 +164,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
+    @IBAction func savePic(sender : AnyObject){
+        let image:UIImage = imageFromCameraRoll.image!
+        
+        if let data: UIImage = image{
+            UIImageWriteToSavedPhotosAlbum(data, self, "image:didFinishSavingWithError:contextInfo:",nil)
+        }
+        
+        
+    }
+    
 
 
     func pickImageFromLibrary() {
@@ -202,6 +213,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         processflg = false
     
         picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func image(image: UIImage,didFinishSavingWithError error: NSError!,contextInfo:UnsafeMutablePointer<Void>){
+        print("1")
+        
+        if error != nil {
+            print(error.code)
+            
+        }
+        
     }
     
     @IBAction func pressCameraRoll(sender: AnyObject) {
