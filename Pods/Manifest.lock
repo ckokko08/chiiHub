@@ -1,12 +1,15 @@
 PODS:
+  - Fusuma (0.5.1)
   - OpenCV (2.4.9)
 
 DEPENDENCIES:
+  - Fusuma
   - OpenCV (= 2.4.9)
 
 SPEC CHECKSUMS:
+  Fusuma: b6b727aabfbf3fd40419393aa25959910d6598d1
   OpenCV: bb17904e55fc19b1f0f6c3e29bc04a7dd31eddb9
 
-PODFILE CHECKSUM: fac69f25c208c4f33fa25e00ee4986608505c30c
+PODFILE CHECKSUM: 7fdd597cae9d83ab6026e2962f0122a38cb7bbaf
 
 COCOAPODS: 1.0.0.beta.2

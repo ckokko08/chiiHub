@@ -36,6 +36,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        imageFromCameraRoll.image = image
+        
         if let img = imageFromCameraRoll.image {
             image = img
             edge = Detector.DetectEdgeWithImage(image)
@@ -229,6 +232,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.navigationController?.navigationBarHidden = true
         pickImageFromLibrary()  //ライブラリから写真を選択する
         NSLog("hogehoge");
+    }
+    
+    @IBAction func colorFilter(){
+        
+        //加工したい画像
+        let filterImage : CIImage = CIImage(image: originalImage)!
+        
+        //加工の準備　色調節
+        filter = CIFilter(name: "CIColorControls")!
+        filter.setValue(filterImage, forkpty: kCIInputImageKey)
+        filter.setValue(1.0, forKey: "inputSaturation")
+        filter.setValue(0.5, forKey: "inputBrightness")
+        filter,setValue(2.5, forKey: "inputContrast")
+        
+        //加工した画像表示
+        let ctx = CIContext(options:nil)
+        let cgImage = ctx.createCGImage(filter.outputImage!, fromRect:filter.outputImage!.extent)
+        cameraImageView.image = UIImage(CGImage: cgImage)
     }
     
 }

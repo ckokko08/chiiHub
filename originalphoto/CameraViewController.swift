@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import Fusuma
 
-class CameraViewController: UIViewController {
+class CameraViewController: UIViewController,FusumaDelegote {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.presentFusuma()
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,6 +29,34 @@ class CameraViewController: UIViewController {
         @IBAction func photo(){
     }
     
+    func presentFusuma(){
+        let fusuma = FusumaViewController()
+        fusuma.delegote = self
+        self.presentedViewController(fusuma, animated: false, completion: nil)
+    }
+    
+    func fusumaImageSelected(image: UIImage){
+        self.toViewTransition(image)
+    }
+    
+    func fusumaVideoCompleted(withfileURL fileURL: NSURL){
+        
+    }
+    
+    func toViewTransition(image: UIImage){
+        self.performSegueWithIdentifier("toView", sender: image)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "toView"{
+            let viewCon = segue.destinationViewController as! ViewController
+            viewCon.image = sender as! UIImage
+    }
+        
+    }
+    
+}
+
 
     /*
     // MARK: - Navigation

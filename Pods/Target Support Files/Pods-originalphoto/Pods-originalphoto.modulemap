@@ -1,0 +1,6 @@
+framework module Pods_originalphoto {
+  umbrella header "Pods-originalphoto-umbrella.h"
+
+  export *
+  module * { export * }
+}
